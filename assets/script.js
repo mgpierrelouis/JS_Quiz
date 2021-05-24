@@ -1,24 +1,54 @@
 var startButton = document.getElementById('start-btn')
+var nextButton = document.getElementById('next-btn')
+var submitButton = document.getElementById('submit-btn')
+var instructionsEl = document.getElementById('instructions')
 var questContainerEl = document.getElementById('question-container')
 var questionEl = document.getElementById('question')
 var answerButtonsEl = document.getElementById('answer-buttons')
+var timerEl= document.getElementById('timer')
+var startingMinutes = 2
+var time = startingMinutes * 60
+
 var shuffledQuestions, currentQuestion
 
 startButton.addEventListener('click' , startGame)
+nextButton.addEventListener('click' , () => {
+    currentQuestionIndex++
+    setNextQuestion()
+    startTimer()
+})
+
+setInterval(startTimer, 1000);
+
+function startTimer() {
+    var minutes = Math.floor(time / 60);
+    var seconds = time % 60;
+    seconds = seconds < 10 ? '0' + seconds : seconds
+    minutes = minutes < 1 ? '' : minutes
+    timerEl.textContent = `${minutes}:${seconds}`
+    time--;
+
+    if(time <= 0) {
+        timerEl.textContent = "Time's Up!"
+        submitButton.classList.remove('hide')        
+    }
+
+}
 
 function startGame() {
-    console.log('started')
     startButton.classList.add('hide')
+    timerEl.classList.remove('hide')
     shuffledQuestions =  questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questContainerEl.classList.remove('hide')
+    instructionsEl.classList.add('hide')
     setNextQuestion()
 }
 
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
-    
+
 }
 
 function showQuestion(question) {
@@ -48,6 +78,11 @@ function selectAnswer(e) {
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide')
+    } else {
+        submitButton.classList.remove('hide')
+    }
 
 }
 
@@ -61,11 +96,10 @@ function setStatusClass(element, correct) {
 }
 
 function clearStatusClass(element) {
-    clearStatusClass(element)
         element.classList.remove('correct')
         element.classList.remove('wrong')    
 }
-   
+
 var questions = [
     {   
         question: 'What year did JavaScript debut?',
@@ -77,7 +111,7 @@ var questions = [
 
         ]
     },
-    
+
     {
         question: 'What company owns the trademark for JavaScript?',
             answers: [
@@ -96,7 +130,7 @@ var questions = [
                 { text: 'Connect the user to the world wide web', correct: false},
                 { text: 'Facilitate communicaiton between the user and web application', correct: true},
             ]        
-            
+
     },
 
     {
@@ -109,4 +143,3 @@ var questions = [
             ]
     },
 ]
-

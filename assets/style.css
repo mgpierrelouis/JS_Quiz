@@ -1,5 +1,5 @@
 *, *::before, *::after {
-    box-sizing:border-box;
+    box-sizing:border-box; 
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 
 }
@@ -8,7 +8,7 @@
     --correct: rgba(84, 233, 39, 0.74);
     --incorrect: rgb(255, 0, 0);
     --btnColor: rgb(92, 120, 247);
-   
+
 }
 
 
@@ -16,23 +16,42 @@ body {
     padding: 0;
     margin: 0;
     display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
     justify-content: center;
     align-items: center;
     background-color:wheat;
+    
 }
 
-body.correct {
+.instructions-container {
+    height: 175px;
+    width: 50%;
+    max-width: 100%;
+    margin-bottom: 64px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+p {
+    text-align: center;
+
+}
+
+.btn.correct {
     background-color: var(--correct);
 }
 
-body.wrong {
+.btn.wrong {
     background-color: var(--incorrect);
 }
 
 .container {
-    width: 800px;
+    width: 500px;
     max-width: 80%;
     background-color: white;
     border-radius: 5px;
@@ -47,12 +66,12 @@ body.wrong {
 .btn {
     background-color: var(--btnColor);
     color: white;
-    size: 0%;
+    size: 90%;
 
 }
 
-.start-btn, .next-btn {
-    font-siz: 1.5rem;
+.start-btn, .next-btn, .submit-btn {
+    font-size: 1.5rem;
     font-weight: bold;
     padding: 10px 20px;
 }
@@ -66,4 +85,4 @@ body.wrong {
 
 .hide {
     display:none
-}
+} 

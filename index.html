@@ -8,6 +8,21 @@
     <title>Quiz</title>
 </head>
 <body>
+    <div class="instructions-container">
+        <h1>JavaScript Quiz</h1>
+        <h1 id="timer" class="timer hide"></h1>
+        <p id="instructions">Here we'll be testing you to see if you know some  basic
+                questions about JavaScript. You'll have 2 minutes to answer 
+                four quesitons about JavaScript's uses and history, but be
+                careful: for every incorrect answer, you will receive a 15
+                second penalty! When the quiz is over, you'll be able to 
+                submit your initials and have your name forever inshrined on
+                our leaderboard. Click the "Start" button below to start the
+                quiz. Good luck!
+        </p>
+    </div>
+    
+
     <div class="container">
         <div id="question-container" class="hide">
             <div id="question">Question</div>
@@ -21,6 +36,7 @@
         <div class="controls">
             <button id= "start-btn" class="start-btn btn">Start</button>
             <button id= "next-btn" class="next-btn btn hide">Next</button>
+            <button id= "submit-btn" class="submit-btn btn hide">Submit</button>
         </div>
 
     </div>
@@ -29,4 +45,5 @@
 <script src="assets/script.js"></script>
 
 </html>
+
 
