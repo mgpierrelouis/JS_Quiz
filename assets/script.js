@@ -8,6 +8,8 @@ var answerButtonsEl = document.getElementById('answer-buttons')
 var timerEl= document.getElementById('timer')
 var startingMinutes = 2
 var time = startingMinutes * 60
+var penalize = false
+var score = 0
 
 var shuffledQuestions, currentQuestion
 
@@ -26,12 +28,16 @@ function startTimer() {
     seconds = seconds < 10 ? '0' + seconds : seconds
     minutes = minutes < 1 ? '' : minutes
     timerEl.textContent = `${minutes}:${seconds}`
+    
     time--;
+    
+   
 
     if(time <= 0) {
         timerEl.textContent = "Time's Up!"
         submitButton.classList.remove('hide')        
     }
+
 
 }
 
@@ -74,7 +80,6 @@ function resetState() {
 function selectAnswer(e) {
     var selectedButton = e.target
     var correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
@@ -83,6 +88,17 @@ function selectAnswer(e) {
     } else {
         submitButton.classList.remove('hide')
     }
+    if (correct == undefined) {
+        time -= 15;
+    } else {
+        score++;
+    }
+
+    
+
+}
+
+function deductTime(amount) {
 
 }
 
